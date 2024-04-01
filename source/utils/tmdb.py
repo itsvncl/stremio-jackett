@@ -23,7 +23,7 @@ def replace_weird_characters(string):
         'ų': 'u', 'ű': 'u', 'ŵ': 'w', 'ý': 'y', 'ÿ': 'y', 'ŷ': 'y',
         'ž': 'z', 'ż': 'z', 'ź': 'z', 'æ': 'ae', 'ǎ': 'a', 'ǧ': 'g',
         'ə': 'e', 'ƒ': 'f', 'ǐ': 'i', 'ǒ': 'o', 'ǔ': 'u', 'ǚ': 'u',
-        'ǜ': 'u', 'ǹ': 'n', 'ǻ': 'a', 'ǽ': 'ae', 'ǿ': 'o',
+        'ǜ': 'u', 'ǹ': 'n', 'ǻ': 'a', 'ǽ': 'ae', 'ǿ': 'o', 'á': 'a',
     }
 
     for weird_char in corresp:
@@ -49,7 +49,7 @@ def get_metadata(id, type, config):
             id=id,
             title=replace_weird_characters(data["movie_results"][0]["title"]),
             year=data["movie_results"][0]["release_date"][:4],
-            language=language
+            language=";".join(config['languages'])
         )
         logger.info("Got metadata for " + type + " with id " + id)
         return result
@@ -59,7 +59,7 @@ def get_metadata(id, type, config):
             title=replace_weird_characters(data["tv_results"][0]["name"]),
             season="S{:02d}".format(int(full_id[1])),
             episode="E{:02d}".format(int(full_id[2])),
-            language=language
+            language=";".join(config['languages'])
         )
         logger.info("Got metadata for " + type + " with id " + id)
         return result

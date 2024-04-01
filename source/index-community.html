@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Stremio-Jackett</title>
+    <title>Stremio-Jackett Community</title>
     <style>
         /*On va ajouter la photo de fond */
         body {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Harbor_Seal_Chillin_%28213656373%29.jpeg/640px-Harbor_Seal_Chillin_%28213656373%29.jpeg');
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://help.nflxext.com/396a2a39-8d34-4260-b07a-6391fe04ded5_what_is_netflix_2_en.png') no-repeat fixed;
             background-size: cover;
             margin: 0;
             padding: 0;
@@ -22,7 +22,7 @@
         }
 
         .multipleSelection {
-            width: 150px;
+            width: 100px;
         }
 
         .selectBox {
@@ -46,10 +46,6 @@
             display: block;
         }
 
-        label {
-            color: white
-        }
-
     </style>
 </head>
 <body class="backdrop-blur">
@@ -58,41 +54,10 @@
         <img src="https://user-images.githubusercontent.com/27040483/28728094-99f3e3f6-73c7-11e7-8f8d-28912dc6ac0d.png"
              alt="logo" style="width: 100px; height: 100px;">
         <div class="space-y-12">
-            <p class="dark:text-white text-center">Stremio-Jackett-Hungary v1.1.0</p>
+            <p class="dark:text-white text-center">Stremio-Jackett Community v3.0.13</p>
             <h1 class="text-base font-semibold leading-7 text-gray-900 dark:text-white"
                 style="text-align: center;font-size: 2rem;">
                 Addon configuration</h1>
-
-
-            <div class="border-b border-gray-900/10 dark:border-white/50 pb-12">
-                <h2 class="text-base font-semibold leading-7 text-gray-900 dark:text-white">Jackett Information</h2>
-                <p class="mt-1 text-sm leading-6 text-gray-600 dark:text-gray-400">You will enter information about your
-                    Jackett
-                    server here</p>
-
-                <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                    <div class="sm:col-span-3">
-                        <label for="jackett-host" class="block text-sm font-medium mb-2 dark:text-white">Jackett
-                            Host</label>
-                        <div class="mt-2">
-                            <input oninput="" type="text" name="jackett-host" id="jackett-host"
-                                   autocomplete="jackett-host"
-                                   class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
-                                   placeholder="I.e: http(s)://jackett.com without / at end">
-                        </div>
-                    </div>
-
-                    <div class="sm:col-span-3">
-                        <label for="jackett-api" class="block text-sm font-medium mb-2 dark:text-white">Jackett API
-                            key</label>
-                        <div class="mt-2">
-                            <input oninput="" type="text" name="jackett-api" id="jackett-api" autocomplete="jackett-api"
-                                   class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
-                                   placeholder="Your Jackett API key">
-                        </div>
-                    </div>
-                </div>
-            </div>
 
 
             <div class="border-b border-gray-900/10 dark:border-white/50 pb-12">
@@ -163,23 +128,6 @@
                                    class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
                                    placeholder="Your TMDB API key">
                         </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="border-b border-gray-900/10 dark:border-white/50 pb-12">
-                <h2 class="text-base font-semibold leading-7 text-gray-900 dark:text-white">Caching</h2>
-                <p class="mt-1 text-sm leading-6 text-gray-600 dark:text-gray-400">You will enter here informations
-                    about the cache</p>
-                <br>
-                <div class="relative flex gap-x-3">
-                    <div class="flex h-6 items-center">
-                        <input oninput="" id="cache" name="cache" value="cache" type="checkbox"
-                               class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" checked>
-                    </div>
-                    <div class="text-sm leading-6">
-                        <label for="cache" class="block text-sm font-medium mb-2 dark:text-white">Enable cache</label>
-                        <p class="text-gray-500 dark:text-gray-300">Enable caching for faster results</p>
                     </div>
                 </div>
             </div>
@@ -333,44 +281,44 @@
                                  class="bg-opacity-70 bg-white dark:bg-opacity-90 dark:bg-gray-900 border-gray-200">
                                 <label for="en">
                                     <input type="checkbox" id="en"/>
-                                    🇬🇧 (English)
+                                    🇬🇧
                                 </label>
 
                                 <label for="fr">
                                     <input type="checkbox" id="fr"/>
-                                    🇫🇷 (French)
+                                    🇫🇷
                                 </label>
                                 <label for="es">
                                     <input type="checkbox" id="es"/>
-                                    🇪🇸 (Spanish)
+                                    🇪🇸
                                 </label>
                                 <label for="de">
                                     <input type="checkbox" id="de"/>
-                                    🇩🇪 (German)
+                                    🇩🇪
                                 </label>
                                 <label for="it">
                                     <input type="checkbox" id="it"/>
-                                    🇮🇹 (Italian)
+                                    🇮🇹
                                 </label>
                                 <label for="pt">
                                     <input type="checkbox" id="pt"/>
-                                    🇵🇹 (Portugese)
+                                    🇵🇹
                                 </label>
                                 <label for="ru">
                                     <input type="checkbox" id="ru"/>
-                                    🇷🇺 (Russian)
+                                    🇷🇺
                                 </label>
                                 <label for="in">
                                     <input type="checkbox" id="in"/>
-                                    🇮🇳 (Indian)
+                                    🇮🇳
                                 </label>
                                 <label for="nl">
                                     <input type="checkbox" id="nl"/>
-                                    🇳🇱 (Dutch)
+                                    🇳🇱
                                 </label>
                                 <label for="hu">
                                     <input type="checkbox" id="hu"/>
-                                    🇭🇺 (Hungarian)
+                                    🇭🇺
                                 </label>
                             </div>
                         </div>
@@ -447,8 +395,6 @@
         if (data) {
             data = atob(data[1]);
             data = JSON.parse(data);
-            document.getElementById('jackett-host').value = data.jackettHost;
-            document.getElementById('jackett-api').value = data.jackettApiKey;
             document.getElementById('debrid-api').value = data.debridKey;
             document.getElementById('tmdb-api').value = data.tmdbApi;
             document.getElementById('service').value = data.service;
@@ -456,7 +402,6 @@
             document.getElementById('maxSize').value = data.maxSize;
             document.getElementById('resultsPerQuality').value = data.resultsPerQuality;
             document.getElementById('maxResults').value = data.maxResults;
-            document.getElementById('cache').checked = data.cache;
             document.getElementById('torrenting').checked = data.torrenting;
             if (data.sort === 'quality') {
                 document.getElementById('quality').checked = true;
@@ -540,8 +485,6 @@
 
     function getLink(method) {
         const addonHost = new URL(window.location.href).protocol.replace(':', '') + "://" + new URL(window.location.href).host
-        const jackettHost = document.getElementById('jackett-host').value;
-        const jackettApi = document.getElementById('jackett-api').value;
         const debridApi = document.getElementById('debrid-api').value;
         const tmdbApi = document.getElementById('tmdb-api').value;
         const service = document.getElementById('service').value;
@@ -549,7 +492,6 @@
         let maxSize = document.getElementById('maxSize').value;
         let resultsPerQuality = document.getElementById('resultsPerQuality').value;
         let maxResults = document.getElementById('maxResults').value;
-        const cache = document.getElementById('cache').checked;
         const torrenting = document.getElementById('torrenting').checked;
         const qualityExclusion = [];
         if (document.getElementById('4k').checked) {
@@ -630,8 +572,6 @@
         }
         let data = {
             addonHost,
-            jackettHost,
-            'jackettApiKey': jackettApi,
             service,
             'debridKey': debridApi,
             maxSize,
@@ -642,10 +582,9 @@
             maxResults,
             'exclusion': qualityExclusion,
             tmdbApi,
-            cache,
             torrenting
         };
-        if (jackettHost === '' || jackettApi === '' || debridApi === '' || tmdbApi === '' || languages.length === 0) {
+        if (debridApi === '' || tmdbApi === '' || languages.length === 0) {
             alert('Please fill all the fields');
             return false;
         }
