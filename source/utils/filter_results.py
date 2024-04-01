@@ -71,7 +71,7 @@ def filter_items(items, media, config):
         except Exception as e:
             logger.error(f"Error while filtering by {filter_name}", exc_info=e)
     logger.info("Finished filtering torrents")
-
+    logger.info(f"Item count after filtering: {len(items)}")
     return items
 
 
