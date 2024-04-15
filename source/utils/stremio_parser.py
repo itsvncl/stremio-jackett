@@ -72,7 +72,11 @@ def parse_to_debrid_stream(torrent_item: TorrentItem, configb64, host, torrentin
     results.put({
         "name": name,
         "description": title,
-        "url": f"{host}/playback/{configb64}/{queryb64}"
+        "url": f"{host}/playback/{configb64}/{queryb64}",
+        "behaviorHints":{
+            "bingeGroup": f"stremio-jackett-{torrent_item.info_hash}",
+            "filename": torrent_item.file_name if torrent_item.file_name is not None else torrent_item.title
+        }
     })
 
     if torrenting and torrent_item.privacy == "public" and torrent_item.file_index is not None:
@@ -82,7 +86,11 @@ def parse_to_debrid_stream(torrent_item: TorrentItem, configb64, host, torrentin
             "description": title,
             "infoHash": torrent_item.info_hash,
             "fileIdx": int(torrent_item.file_index),
-            "sources": ["tracker:" + tracker for tracker in torrent_item.trackers]
+            "sources": ["tracker:" + tracker for tracker in torrent_item.trackers],
+            "behaviorHints":{
+                "bingeGroup": f"stremio-jackett-{torrent_item.info_hash}",
+                "filename": torrent_item.file_name if torrent_item.file_name is not None else torrent_item.title
+            }
         })
 
 
