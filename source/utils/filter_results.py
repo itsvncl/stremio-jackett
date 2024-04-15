@@ -36,11 +36,13 @@ def filter_out_non_matching(items, season, episode):
 
         season_substrings = re.findall(season_pattern, title)
         if len(season_substrings) > 0 and season not in season_substrings:
-            continue
+            if re.search(r'S\d+.*-.*S\d+', title) == None:
+                continue
 
         episode_substrings = re.findall(episode_pattern, title)
         if len(episode_substrings) > 0 and episode not in episode_substrings:
-            continue
+            if re.search(r'E\d+.*-.*E\d+', title) == None:
+                continue
 
         filtered_items.append(item)
 
