@@ -35,14 +35,33 @@ def filter_out_non_matching(items, season, episode):
         episode_pattern = r'E\d+'
 
         season_substrings = re.findall(season_pattern, title)
-        if len(season_substrings) > 0 and season not in season_substrings:
-            if re.search(r'S\d+.*-.*S\d+', title) == None:
+        season_substrings_len = len(season_substrings)
+        if season_substrings_len > 0 and season_substrings_len != 2 and season not in season_substrings:
+            continue
+        
+        if season_substrings_len == 2:
+            season_num = int(season[1:])
+            season_substrings[0] = int(season_substrings[0][1:])
+            season_substrings[1] = int(season_substrings[1][1:])
+            season_substrings.sort()
+            
+            if season_num < season_substrings[0] or season_num > season_substrings[1]:
                 continue
 
-        episode_substrings = re.findall(episode_pattern, title)
-        if len(episode_substrings) > 0 and episode not in episode_substrings:
-            if re.search(r'E\d+.*-.*E\d+', title) == None:
+        if season_substrings_len != 0:
+            episode_substrings = re.findall(episode_pattern, title)
+            episode_substrings_len = len(episode_substrings)
+            if episode_substrings_len > 0 and episode_substrings_len != 2 and episode not in episode_substrings:
                 continue
+            
+            if episode_substrings_len == 2:
+                ep_num = int(episode[1:])
+                episode_substrings[0] = int(episode_substrings[0][1:])
+                episode_substrings[1] = int(episode_substrings[1][1:])
+                episode_substrings.sort()
+                
+                if ep_num < episode_substrings[0] or ep_num > episode_substrings[1]:
+                    continue
 
         filtered_items.append(item)
 
