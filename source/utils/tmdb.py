@@ -35,21 +35,20 @@ def replace_weird_characters(string):
 def get_metadata(id, type, config):
     logger.info("Getting metadata for " + type + " with id " + id)
 
-    id_fragments = id.split(":")
     language = "en" if "en" in config['languages'] else config['languages'][0]
     logger.info(f"Language set to: {language}")
     
     if id.startswith('tt'):
-        result = get_metadata_with_imdb(id_fragments, config['tmdbApi'], language)
+        result = get_metadata_with_imdb(type, id, config['tmdbApi'], language)
     else:
-        result = get_metadata_with_tmdb(id_fragments, config['tmdbApi'], language)
+        result = get_metadata_with_tmdb(type, id, config['tmdbApi'], language)
         
-    result.id = id
-    
     logger.info("Got metadata for " + type + " with id " + id)
     return result
 
-def get_metadata_with_imdb(id_fragments, api_key, language):
+def get_metadata_with_imdb(type, id, api_key, language):
+    id_fragments = id.split(":")
+    
     url = f"https://api.themoviedb.org/3/find/{id_fragments[0]}?api_key={api_key}&external_source=imdb_id&language={language}"
     response = requests.get(url)
     data = response.json()
@@ -74,7 +73,9 @@ def get_metadata_with_imdb(id_fragments, api_key, language):
         )
         return result
 
-def get_metadata_with_tmdb(id_fragments, api_key, language):
+def get_metadata_with_tmdb(type, id, api_key, language):
+    id_fragments = id.split(":")
+    
     if type == "movie":
         url = f"https://api.themoviedb.org/3/movie/{id_fragments[1]}?api_key={api_key}&language={language}"
         response = requests.get(url)
