@@ -35,10 +35,22 @@ def replace_weird_characters(string):
 def get_metadata(id, type, config):
     logger.info("Getting metadata for " + type + " with id " + id)
 
-    full_id = id.split(":")
+    id_fragments = id.split(":")
     language = "en" if "en" in config['languages'] else config['languages'][0]
     logger.info(f"Language set to: {language}")
-    url = f"https://api.themoviedb.org/3/find/{full_id[0]}?api_key={config['tmdbApi']}&external_source=imdb_id&language={language}"
+    
+    if id.startswith('tt'):
+        result = get_metadata_with_imdb(id_fragments, config['tmdbApi'], language)
+    else:
+        result = get_metadata_with_tmdb(id_fragments, config['tmdbApi'], language)
+        
+    result.id = id
+    
+    logger.info("Got metadata for " + type + " with id " + id)
+    return result
+
+def get_metadata_with_imdb(id_fragments, api_key, language):
+    url = f"https://api.themoviedb.org/3/find/{id_fragments[0]}?api_key={api_key}&external_source=imdb_id&language={language}"
     response = requests.get(url)
     data = response.json()
     logger.info("Got response from TMDB")
@@ -49,17 +61,48 @@ def get_metadata(id, type, config):
             id=id,
             title=replace_weird_characters(data["movie_results"][0]["title"]),
             year=data["movie_results"][0]["release_date"][:4],
-            language=";".join(config['languages'])
+            language=language
         )
-        logger.info("Got metadata for " + type + " with id " + id)
         return result
     else:
         result = Series(
             id=id,
             title=replace_weird_characters(data["tv_results"][0]["name"]),
-            season="S{:02d}".format(int(full_id[1])),
-            episode="E{:02d}".format(int(full_id[2])),
-            language=";".join(config['languages'])
+            season="S{:02d}".format(int(id_fragments[1])),
+            episode="E{:02d}".format(int(id_fragments[2])),
+            language=language
         )
-        logger.info("Got metadata for " + type + " with id " + id)
+        return result
+
+def get_metadata_with_tmdb(id_fragments, api_key, language):
+    if type == "movie":
+        url = f"https://api.themoviedb.org/3/movie/{id_fragments[1]}?api_key={api_key}&language={language}"
+        response = requests.get(url)
+        data = response.json()
+        logger.info("Got response from TMDB with TMDB ID")
+        logger.info(data)
+        
+        result = Movie(
+            id=id,
+            title=replace_weird_characters(data["title"]),
+            year=data["release_date"][:4],
+            language=language
+        )
+        
+        return result
+        
+    else:
+        url = f"https://api.themoviedb.org/3/tv/{id_fragments[1]}?api_key={api_key}&language={language}"
+        response = requests.get(url)
+        data = response.json()
+        logger.info("Got response from TMDB with IMDB ID")
+        logger.info(data)
+        
+        result = Series(
+            id=id,
+            title=replace_weird_characters(data["name"]),
+            season="S{:02d}".format(int(id_fragments[2])),
+            episode="E{:02d}".format(int(id_fragments[3])),
+            language=language
+        )
         return result

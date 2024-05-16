@@ -95,7 +95,7 @@ class JackettService:
             return []
 
     def __search_series_indexer(self, series, indexer):
-        if indexer.title == "nCore":
+        if indexer.title == "nCore" and series.id.startswith('tt'):
             return self.__get_series_ncore(series, indexer)
         
         season = str(int(series.season.replace('S', '')))
