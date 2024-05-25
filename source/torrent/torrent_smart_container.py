@@ -72,11 +72,24 @@ class TorrentSmartContainer:
 
             files = []
             strict_files = []
-            if torrent_item.type == "series":
+            self.logger.debug("Real-Debrid availability check.")
+            if torrent_item.file_index != None:
+                self.logger.debug(f"Checking availability with file-index: {torrent_item.file_index}")
+                for variants in details["rd"]:
+                    if str(torrent_item.file_index) in variants:
+                        file = variants[str(torrent_item.file_index)]
+                        strict_files.append({
+                                "file_index": torrent_item.file_index,
+                                "title": file["filename"],
+                                "size": file["filesize"]
+                            })
+                        break
+            elif torrent_item.type == "series":
+                self.logger.debug("Checking series availability with filenames")
                 for variants in details["rd"]:
                     for file_index, file in variants.items():
                         if season_episode_in_filename(file["filename"], torrent_item.season, torrent_item.episode,
-                                                      strict=True):
+                                                    strict=True):
                             strict_files.append({
                                 "file_index": file_index,
                                 "title": file["filename"],
@@ -88,8 +101,9 @@ class TorrentSmartContainer:
                                 "file_index": file_index,
                                 "title": file["filename"],
                                 "size": file["filesize"]
-                            })
+                        })
             else:
+                self.logger.debug("Checking movie availability with filename")
                 for variants in details["rd"]:
                     for file_index, file in variants.items():
                         files.append({

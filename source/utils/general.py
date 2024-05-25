@@ -1,4 +1,5 @@
 from utils.logger import setup_logger
+import re
 
 logger = setup_logger(__name__)
 
@@ -51,3 +52,31 @@ def is_video_file(filename):
         return False
     
     return filename[extension_idx:] in video_formats
+
+def post_season_episode_filter(files, season, episode):
+    if season.lower().startswith("s"):
+        season = season[1:]
+    if episode.lower().startswith("e"):
+        episode = episode[1:]
+    
+    post_filtered = []
+    for file in files:
+        if season + episode in file['title']:
+            post_filtered.append(file)
+        elif are_numbers_isolated(file['title'], season, episode):
+            post_filtered.append(file)
+        
+    
+    if len(post_filtered) == 0:
+        return files
+
+    return post_filtered
+
+def are_numbers_isolated(s, p1, p2):
+    pattern1 = rf'(?<!\d){p1}(?!\d)'
+    pattern2 = rf'(?<!\d){p2}(?!\d)'
+    
+    match1 = re.search(pattern1, s)
+    match2 = re.search(pattern2, s)
+    
+    return bool(match1) and bool(match2)
