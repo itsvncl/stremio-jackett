@@ -96,7 +96,9 @@ class JackettService:
 
     def __search_series_indexer(self, series, indexer):
         if indexer.title == "nCore" and series.id.startswith('tt'):
-            return self.__get_series_ncore(series, indexer)
+            ncore_results = self.__get_series_ncore(series, indexer)
+            if len(ncore_results) != 0:
+                return ncore_results
         
         season = str(int(series.season.replace('S', '')))
         episode = str(int(series.episode.replace('E', '')))
