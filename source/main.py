@@ -161,7 +161,7 @@ async def get_results(config: str, stream_type: str, stream_id: str):
     hashes = torrent_smart_container.get_hashes()
     result = debrid_service.get_availability_bulk(hashes)
     torrent_smart_container.update_availability(result, type(debrid_service))
-    logger.debug("Checked availability (results: " + str(len(result.items())) + ")")
+    logger.debug("Checked availability (results: " + str(len(result.items() if result != None and result != [] else [])) + ")")
 
     # Maybe add an if to only save to cache if caching is enabled?
     torrent_smart_container.cache_container_items()

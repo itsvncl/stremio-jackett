@@ -64,6 +64,9 @@ class TorrentSmartContainer:
             raise NotImplemented
 
     def __update_availability_realdebrid(self, response):
+        if response == None or response == []:
+            return
+        
         for info_hash, details in response.items():
             if "rd" not in details:
                 continue

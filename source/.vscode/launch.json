@@ -10,7 +10,7 @@
       "request": "launch",
       "module": "uvicorn",
       "console": "integratedTerminal",
-      "args": ["main:app", "--reload", "--port", "1337"]
+      "args": ["main:app", "--reload", "--port", "3000"]
     }
   ]
 }
